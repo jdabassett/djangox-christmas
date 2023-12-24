@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
-# from django.contrib.auth import get_user_model
-# from django.conf import settings
+from django.contrib.auth import get_user_model
 
 
 class NoteForSanta(models.Model):
@@ -9,7 +8,7 @@ class NoteForSanta(models.Model):
     is_nice = models.BooleanField(verbose_name="Have you been good this year?", default=False)
     wishlist = models.TextField(verbose_name="What would you like for Christmas?", max_length=250)
     date = models.DateField(auto_now=True)
-    # created_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    created_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['name']

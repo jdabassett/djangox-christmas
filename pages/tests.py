@@ -2,11 +2,12 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from pages.models import NoteForSanta
 from django.urls import reverse
+# from django.contrib.auth.models import User
 
-class TestNotesStatusTemplatesContents(TestCase):
+class TestNotes(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(username="username",password="password",email="email")
-        self.note = NoteForSanta.objects.create(name='name', is_nice=False, wishlist="wishlist")
+        self.note = NoteForSanta.objects.create(name='name', is_nice=False, wishlist="wishlist", created_by=self.user)
 
     def test_greet_status_code_templates_contents(self):
         response = self.client.get(reverse('greet'))
@@ -50,21 +51,16 @@ class TestNotesStatusTemplatesContents(TestCase):
         self.assertTemplateUsed(response, "pages/note_delete.html")
         self.assertContains(response, "Are you sure you want to delete this note?")
 
-
-class TestNotesRequests(TestCase):
-    def setUp(self):
-        self.user = get_user_model().objects.create_user(username="username",password="password",email="email")
-        self.note = NoteForSanta.objects.create(name='name', is_nice=False, wishlist="wishlist")
-
     def test_note_create(self):
+        self.client.force_login(self.user)
         response = self.client.post(
             reverse("note_create"),
-            {'name': "name", "wishlist": "wishlist"},
+            {'name': "create", "wishlist": "wishlist"},
             follow=True
         )
 
         self.assertRedirects(response, reverse('note_detailed', kwargs={"pk": "2"}))
-        self.assertContains(response, "<h1>Note from name to Santa!</h1>")
+        self.assertContains(response, "<h1>Note from create to Santa!</h1>")
 
     def test_note_update(self):
         response = self.client.post(
@@ -81,3 +77,9 @@ class TestNotesRequests(TestCase):
             follow=True
         )
         self.assertRedirects(response, reverse('notes'))
+
+
+
+
+
+
