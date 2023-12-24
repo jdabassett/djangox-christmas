@@ -26,6 +26,10 @@ class NoteCreateView(CreateView):
     template_name = "pages/note_create.html"
     context_object_name = 'note_create'
 
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
 
 class NoteUpdateView(UpdateView):
     model = NoteForSanta
