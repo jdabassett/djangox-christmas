@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+
+{% block title %}Review Note{% endblock title %}
+
+{% block content %}
+    <h1>Note from {{ note.name }} to Santa!</h1>
+    <p>{{ note.date | date:"F j, Y" }}</p>
+    {% if note.is_nice %}
+        <p>Has been nice this year!</p>
+        <p>Wishlist:</p>
+        <p>{{ note.wishlist }}</p>
+    {% else %}
+        <p>Has been naughty this year. :(</p>
+    {% endif %}
+    <a href="{% url 'note_update' note.id %}">Update</a>
+    <a href="{% url 'note_delete' note.id %}">Delete</a>
+{% endblock content %}

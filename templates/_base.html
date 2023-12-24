@@ -9,7 +9,6 @@
   <title>{% block title %}DjangoX{% endblock title %}</title>
   <meta name="description" content="A framework for launching new Django projects quickly.">
   <meta name="author" content="">
-  <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 
   {% block css %}
   <!-- Bootstrap CSS -->
@@ -31,8 +30,9 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{% url 'home' %}" class="nav-link px-2 link-secondary">Home</a></li>
-          <li><a href="{% url 'about' %}" class="nav-link px-2 link-dark">About</a></li>
+          <li><a href="{% url 'greet' %}" class="nav-link px-2 link-secondary">Greet</a></li>
+          <li><a href="{% url 'note_create' %}" class="nav-link px-2 link-dark">Create Note</a></li>
+            <li><a href="{% url 'notes' %}" class="nav-link px-2 link-dark">View Notes</a></li>
         </ul>
 
         <div class="dropdown text-end">
@@ -67,7 +67,7 @@
 
   <footer class="footer">
     <div class="container">
-      <span class="text-muted">Footer...</span>
+      <span class="text-muted">Deck the halls with bells of Holly. Falalalallaaaaa LalalalAAAAA!</span>
     </div>
   </footer>
 

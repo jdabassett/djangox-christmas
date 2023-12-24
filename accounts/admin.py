@@ -2,13 +2,15 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
-from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from accounts.forms import ChildVisitorCreationForm, ChildVisitorChangeForm
+from accounts.models import ChildVisitor
 
-class CustomUserAdmin(UserAdmin):
-    add_form = CustomUserCreationForm
-    form = CustomUserChangeForm
-    model = CustomUser
+
+class ChildVisitorAdmin(UserAdmin):
+    add_form = ChildVisitorCreationForm
+    form = ChildVisitorChangeForm
+    model = ChildVisitor
     list_display = ['email', 'username',]
 
-admin.site.register(CustomUser, CustomUserAdmin)
+
+admin.site.register(ChildVisitor, ChildVisitorAdmin)
